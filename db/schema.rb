@@ -10,6 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
+ActiveRecord::Schema.define(version: 2023_07_25_103519) do
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "news_article_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["news_article_id"], name: "index_bookmarks_on_news_article_id"
+    t.index ["user_id", "news_article_id"], name: "index_bookmarks_on_user_id_and_news_article_id", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "news_articles", force: :cascade do |t|
+    t.string "headline", null: false
+    t.text "summary", null: false
+    t.text "content", null: false
+    t.datetime "publication_date", null: false
+    t.string "sentiment", default: "neutral", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_preferences", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.boolean "hide_negative_sentiment", default: false
+    t.boolean "hide_positive_sentiment", default: false
+    t.boolean "hide_neutral_sentiment", default: false
+    t.boolean "prioritize_positive_news", default: false
+    t.boolean "prioritize_negative_news", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_preferences_on_user_id"
+  end
+
+  add_foreign_key "bookmarks", "news_articles"
+  add_foreign_key "bookmarks", "users"
+  add_foreign_key "user_preferences", "users"
 ActiveRecord::Schema.define(version: 2023_07_26_045358) do
 
   create_table "users", force: :cascade do |t|
