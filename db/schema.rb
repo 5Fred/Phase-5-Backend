@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(version: 2023_07_25_103519) do
     t.text "content", null: false
     t.datetime "publication_date", null: false
     t.string "sentiment", default: "neutral", null: false
+    t.string "image_url"
+    t.string "author_name"
+    t.string "url", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
