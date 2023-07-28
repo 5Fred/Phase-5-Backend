@@ -1,5 +1,7 @@
 class NewsArticlesController < ApplicationController
-    # Index action to fetch all news articles
+  skip_before_action :authenticate_user
+ 
+  # Index action to fetch all news articles
     def index
       news_articles = NewsArticle.all
       render json: news_articles, status: :ok
