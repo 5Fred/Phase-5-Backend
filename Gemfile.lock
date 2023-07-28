@@ -60,9 +60,6 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
-
-    bcrypt (3.1.16)
-
     bcrypt (3.1.19)
     bindex (0.8.1)
     bootsnap (1.16.0)
@@ -123,6 +120,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.7.1)
     rack (2.2.7)
+    rack-cors (2.0.1)
+      rack (>= 2.0.0)
     rack-mini-profiler (2.3.4)
       rack (>= 1.2.0)
     rack-proxy (0.7.6)
@@ -207,6 +206,7 @@ DEPENDENCIES
   listen (~> 3.3)
   news-api
   puma (~> 5.0)
+  rack-cors
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.7, >= 6.1.7.4)
   spring
@@ -215,9 +215,6 @@ DEPENDENCIES
   tzinfo-data
   web-console (>= 4.1.0)
   webpacker (~> 5.0)
-
-RUBY VERSION
-   ruby 3.0.2p107
 
 BUNDLED WITH
    2.3.5

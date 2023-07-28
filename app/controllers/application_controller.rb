@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+    include ActionController::Cookies
     include JwtToken
     before_action :authenticate_user
 
@@ -15,4 +16,11 @@ class ApplicationController < ActionController::API
             render json: {errors: e.message}, status: :unauthorized
         end
     end
+    
+    def handle_options_request
+        headers['Access-Control-Allow-Origin'] = '*'
+        headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, PATCH, DELETE, OPTIONS'
+        headers['Access-Control-Allow-Headers'] = 'X-Requested-With, Content-Type, Authorization'
+        head :ok
+      end
 end
