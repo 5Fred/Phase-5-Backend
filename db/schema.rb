@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2023_07_25_103519) do
+ActiveRecord::Schema.define(version: 2023_07_26_045358) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -48,11 +47,6 @@ ActiveRecord::Schema.define(version: 2023_07_25_103519) do
     t.index ["user_id"], name: "index_user_preferences_on_user_id"
   end
 
-  add_foreign_key "bookmarks", "news_articles"
-  add_foreign_key "bookmarks", "users"
-  add_foreign_key "user_preferences", "users"
-ActiveRecord::Schema.define(version: 2023_07_26_045358) do
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "username"
@@ -62,4 +56,7 @@ ActiveRecord::Schema.define(version: 2023_07_26_045358) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "bookmarks", "news_articles"
+  add_foreign_key "bookmarks", "users"
+  add_foreign_key "user_preferences", "users"
 end

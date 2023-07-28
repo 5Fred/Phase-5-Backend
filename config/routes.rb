@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # News Articles routes
-  resources :news_articles, only: [:index, :show]
+  resources :news_articles, only: [:index, :show ,:create, :update, :destroy]
   # Add other routes for create, update, and delete actions if needed
 
   # User Preferences routes
