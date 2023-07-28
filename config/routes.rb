@@ -15,5 +15,8 @@ Rails.application.routes.draw do
   # Authentication route
   post '/auth/login', to: 'authentication#login'
 
+  # Handle OPTIONS request for /users endpoint
+  match '/users', to: 'application#handle_options_request', via: :options
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
