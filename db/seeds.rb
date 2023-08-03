@@ -1,4 +1,3 @@
-# seeds.rb
 puts "Started seeding"
 require 'dotenv/load'
 require 'news-api'
@@ -12,14 +11,11 @@ newsapi = News.new(api_key)
 response = newsapi.get_top_headlines(sources: 'bbc-news', language: 'en', pageSize: 20)
 articles = response# Extract the 'articles' field from the API response
 
-# Seed news articles
 articles.each do |article_data|
   begin
     # Fetch the full article details using the article's URL
     article_response = HTTParty.get(article_data.url)
     article_html = article_response.body.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
-
-    # Parse the HTML and extract the main content using Nokogiri
     doc = Nokogiri::HTML(article_html)
     main_content = doc.css('article').text # You may need to adjust the selector based on the structure of the article page.
 
