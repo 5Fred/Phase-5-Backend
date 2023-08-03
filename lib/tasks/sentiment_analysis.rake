@@ -27,7 +27,7 @@ namespace :sentiment_analysis do
     http.use_ssl = true
 
     request = Net::HTTP::Get.new(api_url)
-    request["X-RapidAPI-Key"] = '8d35c8f1a7mshb54a8aa5802f1ddp149814jsnbeb60a181547'
+    request["X-RapidAPI-Key"] = ENV['X-RapidAPI-Key']
     request["X-RapidAPI-Host"] = 'news-sentiment2.p.rapidapi.com'
 
     response = http.request(request)
