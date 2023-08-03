@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2023_07_26_045358) do
     t.text "content", null: false
     t.datetime "publication_date", null: false
     t.string "sentiment", default: "neutral", null: false
+    t.json "sentiment_score", default: {}, null: false
     t.string "image_url"
     t.string "author_name"
     t.string "url", null: false
