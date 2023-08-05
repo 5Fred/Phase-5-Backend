@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::API
+
     before_action :authenticate_user, unless: :public_action? # Add the unless condition to skip authentication for public actions
   
+
     private
   
     def authenticate_user
@@ -16,6 +18,7 @@ class ApplicationController < ActionController::API
       end
     end
 
+
     def public_action?
         # Return true for any actions that should be accessible without authentication
         controller_name == 'news_articles' && action_name == 'index'
@@ -23,3 +26,4 @@ class ApplicationController < ActionController::API
     
   end
   
+

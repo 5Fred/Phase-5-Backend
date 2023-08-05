@@ -33,6 +33,8 @@ module SentimentBackend
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
     config.generators.system_tests = nil
   end
 end
