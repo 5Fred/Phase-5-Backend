@@ -1,5 +1,5 @@
 class NewsArticlesController < ApplicationController
-  skip_before_action :authenticate_user, only: [:index]
+  skip_before_action :authenticate_user, only: [:index , :show]
 
   def index
     user_preference = current_user&.user_preference
@@ -21,6 +21,12 @@ class NewsArticlesController < ApplicationController
     render json: @news_articles
   end
 
+  def show
+    @news_article = NewsArticle.find(params[:id])
+    render json: @news_article
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { error: 'News article not found' }, status: :not_found
+  end
   private
 
   def current_user
