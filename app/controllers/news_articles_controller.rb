@@ -1,20 +1,38 @@
 class NewsArticlesController < ApplicationController
-  skip_before_action :authenticate_user
+  skip_before_action :authenticate_user, only: [:index]
 
-  
-  # Index action to fetch all news articlessss
-    def index
-      news_articles = NewsArticle.all
-      render json: news_articles, status: :ok
+  def index
+    user_preference = current_user&.user_preference
+
+    if user_preference.present?
+      if user_preference.hide_negative_sentiment
+        @news_articles = NewsArticle.where.not(sentiment: 'negative')
+      elsif user_preference.hide_positive_sentiment
+        @news_articles = NewsArticle.where.not(sentiment: 'positive')
+      elsif user_preference.hide_neutral_sentiment
+        @news_articles = NewsArticle.where.not(sentiment: 'neutral')
+      else
+        @news_articles = NewsArticle.all
+      end
+    else
+      @news_articles = NewsArticle.all
     end
-  
-    # Show action to fetch a specific news article by ID
-    def show
-      news_article = NewsArticle.find(params[:id])
-      render json: news_article, status: :ok
-    end
-  
-    # Other actions for Create, Update, and Delete operations
+
+    render json: @news_articles
   end
-  
 
+  private
+
+  def current_user
+    header = request.headers['Authorization']
+    header = header.split(' ').last if header
+    begin
+      decoded_token = JWT.decode(header, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
+      @current_user = User.find(decoded_token.first['user_id'])
+    rescue ActiveRecord::RecordNotFound => e
+      nil
+    rescue JWT::DecodeError => e
+      nil
+    end
+  end
+end

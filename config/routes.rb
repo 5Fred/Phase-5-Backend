@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   # Add other routes for create, update, and delete actions if needed
 
   # User Preferences routes
-  resources :users, only: [:index,:show,:create] do
-    resource :user_preferences, only: [:show, :create, :update]
-    # Add other routes for delete action if needed
+  get '/users/preferences', to: 'users#show_preferences'
+  patch '/users/preferences', to: 'users#update_preferences'
+  
+  resources :users, only: [:index, :show, :create, :update, :destroy] do
+    resource :user_preferences, only: [:show, :update]
   end
-
   # Users route for create, read, update, and delete actions
   resources :users
 
