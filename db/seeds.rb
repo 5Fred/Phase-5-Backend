@@ -4,6 +4,20 @@ require 'news-api'
 require 'httparty'
 require 'nokogiri'
 
+user = User.create!(
+  name: 'John Doe', 
+  username: 'johndoe',
+  email: 'john@gmail.com', 
+  password: '12345678' ,
+  password_confirmation: '12345678'
+)
+user_preference = UserPreference.create!(
+  user: user,
+  hide_negative_sentiment: false,
+  hide_positive_sentiment: false,
+  hide_neutral_sentiment: false
+)
+
 api_key = ENV['API_KEY']
 newsapi = News.new(api_key)
 
@@ -27,7 +41,8 @@ articles.each do |article_data|
       sentiment: 'neutral', # Assuming 'neutral' sentiment for now
       image_url: article_data.urlToImage, # Add the image_url field from the 'urlToImage' field in the API response
       author_name: article_data.author, # Add the author_name field from the 'author' field in the API response
-      url: article_data.url # Add the URL of the article
+      url: article_data.url, # Add the URL of the article
+      user_preference: user_preference
     )
   rescue StandardError => e
     puts "Error occurred while fetching article content for: #{article_data.title}. Error: #{e.message}"

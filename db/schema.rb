@@ -26,14 +26,16 @@ ActiveRecord::Schema.define(version: 2023_07_26_045358) do
     t.string "headline", null: false
     t.text "summary", null: false
     t.text "content", null: false
-    t.datetime "publication_date", null: false
+    t.date "publication_date", null: false
     t.string "sentiment", default: "neutral", null: false
     t.json "sentiment_score", default: {}, null: false
     t.string "image_url"
     t.string "author_name"
     t.string "url", null: false
+    t.integer "user_preference_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_preference_id"], name: "index_news_articles_on_user_preference_id"
   end
 
   create_table "user_preferences", force: :cascade do |t|
@@ -41,8 +43,6 @@ ActiveRecord::Schema.define(version: 2023_07_26_045358) do
     t.boolean "hide_negative_sentiment", default: false
     t.boolean "hide_positive_sentiment", default: false
     t.boolean "hide_neutral_sentiment", default: false
-    t.boolean "prioritize_positive_news", default: false
-    t.boolean "prioritize_negative_news", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_user_preferences_on_user_id"
@@ -59,5 +59,6 @@ ActiveRecord::Schema.define(version: 2023_07_26_045358) do
 
   add_foreign_key "bookmarks", "news_articles"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "news_articles", "user_preferences"
   add_foreign_key "user_preferences", "users"
 end
