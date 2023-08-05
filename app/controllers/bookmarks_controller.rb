@@ -1,7 +1,6 @@
 # app/controllers/bookmarks_controller.rb
 
 class BookmarksController < ApplicationController
-    skip_before_action :authenticate_user 
     before_action :set_bookmark, only: [:destroy]
   
     def index
@@ -24,7 +23,13 @@ class BookmarksController < ApplicationController
         render json: { error: bookmark.errors.full_messages.join(', ') }, status: :unprocessable_entity
       end
     end
-  
+    
+    def show
+      bookmark = Bookmark.find_by(news_article_id: params[:id], user_id: @current_user.id)
+      
+      render json: bookmark
+    end
+
     def destroy
       @bookmark.destroy
       head :no_content
