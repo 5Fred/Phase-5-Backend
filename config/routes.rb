@@ -15,8 +15,9 @@ Rails.application.routes.draw do
 
   # Authentication route
   post '/auth/login', to: 'authentication#login'
-  resources :bookmarks, only: [:index, :create, :destroy]
+  resources :bookmarks, only: [:index, :create, :destroy , :show]
   post 'sentiment_analysis', to: 'sentiment_analysis#analyze'
+  get '/user_articles', to: 'user_articles#index'
 
   # Handle OPTIONS request for /users endpoint
   match '/users', to: 'application#handle_options_request', via: :options
