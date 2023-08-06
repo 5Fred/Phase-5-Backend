@@ -1,7 +1,11 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :bookmarks
+
   has_many :news_articles, through: :bookmarks 
+
+  has_many :news_articles, through: :bookmarks
+
   has_one :user_preference, dependent: :destroy
 
   validates :username, presence: true, uniqueness: true
