@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # User Preferences routes
   get '/users/preferences', to: 'users#show_preferences'
   patch '/users/preferences', to: 'users#update_preferences'
-  
+  get '/user_articles', to: 'user_articles#index'
   resources :users, only: [:index, :show, :create, :update, :destroy] do
     resource :user_preferences, only: [:show, :update]
   end

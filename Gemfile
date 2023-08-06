@@ -25,8 +25,6 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'news-api'
-gem 'rack-cors'
-gem 'aylien_news_api'
 gem 'faraday'
 
 # Use Active Storage variant
