@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   # News Articles routes
   resources :news_articles, only: [:index, :show ,:create, :update, :destroy]
   # Add other routes for create, update, and delete actions if needed
-
+  namespace :api do
+    post 'analyze_sentiment', to: 'sentiments#analyze_sentiment'
+  end
   # User Preferences routes
   get '/users/preferences', to: 'users#show_preferences'
   patch '/users/preferences', to: 'users#update_preferences'
