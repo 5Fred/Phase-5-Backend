@@ -22,9 +22,7 @@ class UserPreferenceController < ApplicationController
     params.require(:user_preference).permit(
       :hide_negative_sentiment,
       :hide_positive_sentiment,
-      :hide_neutral_sentiment,
-      :prioritize_positive_news,
-      :prioritize_negative_news
+      :hide_neutral_sentiment
     )
   end
 end
