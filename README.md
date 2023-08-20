@@ -31,6 +31,17 @@ Open the folder location on terminal and use the following command to run app:
 ## How To Run It
 $ bundle install To install all requirements
 
+# Database Creation
+To create the database, run the following command:
+$ rails db:create
+Database Initialization
+To set up the initial database schema and seed data, run the following commands:
+
+$ rails db:migrate
+$ rails db:seed
+This will create the necessary tables and populate the database with sample data.
+To analyze the sentiment of news articles in the database run : 
+$ rails sentiment_analysis:analyze
 $ rails s Then run server with the above command
 
 Live Link
@@ -43,3 +54,4 @@ Contact Information
 Email : emmanuelgichigo@gmail.com
 License
 MIT License Copyright (c) 2023 EMMANUEL MUKIRA
+

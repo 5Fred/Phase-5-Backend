@@ -3,11 +3,10 @@ require 'dotenv/load'
 require 'news-api'
 require 'httparty'
 require 'nokogiri'
-
 user = User.create!(
-  name: 'John Doe', 
+  name: 'John Doe',
   username: 'johndoe',
-  email: 'john@gmail.com', 
+  email: 'john@gmail.com',
   password: '12345678' ,
   password_confirmation: '12345678'
 )
@@ -17,14 +16,11 @@ user_preference = UserPreference.create!(
   hide_positive_sentiment: false,
   hide_neutral_sentiment: false
 )
-
-api_key = ENV['API_KEY']
+api_key = "7f3239f8fc534e60996d87efe0f1f63c"
 newsapi = News.new(api_key)
-
 # Get top headlines from the News API
 response = newsapi.get_top_headlines(sources: 'bbc-news', language: 'en', pageSize: 100)
 articles = response# Extract the 'articles' field from the API response
-
 articles.each do |article_data|
   begin
     # Fetch the full article details using the article's URL
@@ -32,7 +28,6 @@ articles.each do |article_data|
     article_html = article_response.body.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
     doc = Nokogiri::HTML(article_html)
     main_content = doc.css('article').text # You may need to adjust the selector based on the structure of the article page.
-
     NewsArticle.create!(
       headline: article_data.title,
       summary: article_data.description,
@@ -48,5 +43,4 @@ articles.each do |article_data|
     puts "Error occurred while fetching article content for: #{article_data.title}. Error: #{e.message}"
   end
 end
-
 puts "Done seeding"

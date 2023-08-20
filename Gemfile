@@ -7,9 +7,12 @@ gem 'rails', '~> 6.1.7', '>= 6.1.7.4'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 gem 'httparty'
+gem 'rack-cors'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
+gem 'rest-client'
+
 #gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
@@ -24,8 +27,6 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'news-api'
-gem 'rack-cors'
-gem 'aylien_news_api'
 gem 'faraday'
 
 # Use Active Storage variant

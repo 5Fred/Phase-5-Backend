@@ -6,3 +6,4 @@ class UserArticlesController < ApplicationController
     render json: user_articles
   end
 end
+end
