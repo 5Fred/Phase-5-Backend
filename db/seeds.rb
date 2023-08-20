@@ -22,7 +22,7 @@ api_key = ENV['API_KEY']
 newsapi = News.new(api_key)
 
 # Get top headlines from the News API
-response = newsapi.get_top_headlines(sources: 'bbc-news', language: 'en', pageSize: 20)
+response = newsapi.get_top_headlines(sources: 'bbc-news', language: 'en', pageSize: 100)
 articles = response# Extract the 'articles' field from the API response
 
 articles.each do |article_data|
